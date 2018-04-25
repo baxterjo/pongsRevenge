@@ -13,7 +13,7 @@ Ball::Ball() {
 	this->sx = 5;
 	this->sy = 5;
 	this->color = ofColor(255, 255, 255);
-}
+};
 
 Ball::Ball(float x, float y, float r, float s, ofColor c){
 	this->x = x;
@@ -22,7 +22,7 @@ Ball::Ball(float x, float y, float r, float s, ofColor c){
 	this->sx = s;
 	this->sy = s;
 	this->color = c;
-}
+};
 
 void Ball::move() {
 	this->x += this->sx;
@@ -39,3 +39,18 @@ void Ball::hitWall() {
 		this->sy *= -1;
 	}
 }
+
+void Ball::hitPaddle() {
+	/* TODO: if(ball hits paddle){
+		this->sx *= -1.01
+
+	Try decaying exponential function here, to reach max possible speed and hold.*/
+}
+
+void Ball :: hitGoal() {
+	if (this->x == (0 - this->r) || this->x == (ofGetWidth() + this->r)) {
+
+	}
+}
+
+

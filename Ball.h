@@ -1,9 +1,9 @@
+//Ball.h
+//Jordan Baxter
+
 #pragma once
 
-#include "Ball.cpp"
 #include "ofMain.h"
-
-using namespace std;
 
 class Ball {
 	public:
