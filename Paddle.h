@@ -8,7 +8,8 @@
 class Paddle {
 	public:
 		Paddle();
-		void move();
+		void moveUp();
+		void moveDown();
 		void draw();
 		void fire();
 

@@ -13,3 +13,21 @@ Paddle::Paddle() {
 	this->ammo = 0;
 	this->color = ofColor(255, 255, 255);
 };
+
+void Paddle::moveUp(){
+	this->y -= this->s;
+}
+
+void Paddle::moveDown() {
+	this->y += this->s;
+}
+
+void Paddle::draw() {
+	ofSetColor(this->color);
+	ofDrawRectangle(this->x, this->y, this->w, this->h);
+}
+
+void Paddle::fire() {
+	//TODO
+	this->ammo -= 1;
+}
