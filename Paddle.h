@@ -6,20 +6,20 @@
 #include "ofMain.h"
 
 class Paddle {
-	public:
-		Paddle();
-		void moveUp();
-		void moveDown();
-		void draw();
-		void fire();
+public:
+	Paddle();
+	void moveUp();
+	void moveDown();
+	void draw();
+	void fire();
 
-	private:
-		float x;
-		float y;
-		float h;
-		float w;
-		float s;
-		int lives;
-		int ammo;
-		ofColor color;
+private:
+	float x;
+	float y;
+	float h;
+	float w;
+	float s;
+	int lives;
+	int ammo;
+	ofColor color;
 };
