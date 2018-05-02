@@ -1,8 +1,12 @@
 #include "ofApp.h"
+#include "Hud.h"
+#include "Ball.h"
+#include "Paddle.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+	ofBackground(0,0,0);
+	hud = new Hud();
 }
 
 //--------------------------------------------------------------
@@ -12,12 +16,14 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+	hud->draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	if (key == OF_KEY_RETURN && hud->getState() == "start") {
+		hud->changeState("play");
+	}
 }
 
 //--------------------------------------------------------------
@@ -57,7 +63,7 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+	hud->resize();
 }
 
 //--------------------------------------------------------------
