@@ -4,24 +4,29 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Paddle.h"
 
 class Hud {
 public:
 	Hud();
 	void changeState(string s);
 	string getState();
-	void draw();
+	void draw(Paddle* p);
 	void drawStart();
-	void drawPlay();
+	void drawPlay(Paddle* p);
 	//void drawEnd();
 	void drawCenterLine(int bottom);
+	void drawScore();
+	void drawLives(Paddle* p);
+	void drawAmmo(Paddle* p);
 	void resize();
 
 private:
 	string state;
 	int score;
-	int hiScore;
+	int hiScore; 
 	ofColor color;
 	ofTrueTypeFont titleFont;
+	ofTrueTypeFont subtitleFont;
 	ofTrueTypeFont gameFont;
 };

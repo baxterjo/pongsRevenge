@@ -10,6 +10,7 @@ class ofApp : public ofBaseApp{
 	public:
 
 		Hud* hud;
+		Paddle* p1;
 
 		void setup();
 		void update();

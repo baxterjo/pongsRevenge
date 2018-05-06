@@ -12,6 +12,8 @@ public:
 	void moveDown();
 	void draw();
 	void fire();
+	int getLives();
+	int getAmmo();
 
 private:
 	float x;

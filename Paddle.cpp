@@ -27,6 +27,14 @@ void Paddle::draw() {
 	ofDrawRectangle(this->x, this->y, this->w, this->h);
 }
 
+int Paddle::getLives() {
+	return this->lives;
+}
+
+int Paddle::getAmmo() {
+	return this->ammo;
+}
+
 void Paddle::fire() {
 	//TODO
 	this->ammo -= 1;
