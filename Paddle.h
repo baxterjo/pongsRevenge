@@ -14,6 +14,7 @@ public:
 	void fire();
 	int getLives();
 	int getAmmo();
+	void changeSize();
 
 private:
 	float x;

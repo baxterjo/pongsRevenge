@@ -18,12 +18,24 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	hud->draw(p1);
+	if (hud->getState() == "play") {
+		p1->draw();
+	}
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	if (key == OF_KEY_RETURN && hud->getState() == "start") {
 		hud->changeState("play");
+	}
+	else if (hud->getState() == "play") {
+		if (key == 'w') {
+			p1->moveUp();
+		}
+		else if (key == 's') {
+			p1->moveDown();
+		}
 	}
 }
 
@@ -65,6 +77,7 @@ void ofApp::mouseExited(int x, int y){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 	hud->resize();
+	p1->changeSize();
 }
 
 //--------------------------------------------------------------

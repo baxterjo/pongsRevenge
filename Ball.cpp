@@ -10,7 +10,7 @@ Ball::Ball() {
 	this->x = ofGetWidth() / 2;
 	this->y = ofGetHeight() / 2;
 	this->r = 5;
-	this->sx = 5;
+	this->sx = 5 * ofRandom(-1,1);
 	this->sy = 5;
 	this->color = ofColor(255, 255, 255);
 };
