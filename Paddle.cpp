@@ -3,10 +3,10 @@
 
 #include "Paddle.h"
 
-Paddle::Paddle() {
-	this->x = 20;
+Paddle::Paddle(int x) {
+	this->x = x;
 	this->y = ofGetHeight() / 2;
-	this->h = ofGetHeight() / 15;
+	this->h = ofGetHeight() / 10;
 	this->w = ofGetWidth() / 150;
 	this->s = 10;
 	this->lives = 3;
@@ -32,6 +32,19 @@ void Paddle::fire() {
 	this->ammo -= 1;
 }
 
+void Paddle::trackBall(Ball* b) {
+
+}
+
+void Paddle::changeSize() {
+	this->w = ofGetWidth() / 150;
+	this->h = ofGetHeight() / 15;
+}
+
+void Paddle::changeX() {
+	this->x = ofGetWidth() - ofGetWidth() / 150 - 20;
+}
+
 int Paddle::getLives() {
 	return this->lives;
 }
@@ -40,7 +53,19 @@ int Paddle::getAmmo() {
 	return this->ammo;
 }
 
-void Paddle::changeSize() {
-	this->w = ofGetWidth() / 150;
-	this->h = ofGetHeight() / 15;
+int Paddle::getX() {
+	return this->x;
+}
+
+int Paddle::getY() {
+	return this->y;
+
+}
+
+int Paddle::getW() {
+	return this->w;
+}
+
+int Paddle::getH() {
+	return this->h;
 }

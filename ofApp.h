@@ -11,6 +11,7 @@ class ofApp : public ofBaseApp{
 
 		Hud* hud;
 		Paddle* p1;
+		Paddle* p2;
 		vector<Ball*> balls;
 
 		void setup();

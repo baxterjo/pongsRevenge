@@ -7,12 +7,15 @@
 void ofApp::setup(){
 	ofBackground(0,0,0);
 	hud = new Hud();
-	p1 = new Paddle();
+	p1 = new Paddle(20);
+	p2 = new Paddle(ofGetWidth() - ofGetWidth() / 150 - 20);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	if (hud->getState() == "play") {
 
+	}
 }
 
 //--------------------------------------------------------------
@@ -20,6 +23,7 @@ void ofApp::draw(){
 	hud->draw(p1);
 	if (hud->getState() == "play") {
 		p1->draw();
+		p2->draw();
 	}
 	
 }
@@ -28,6 +32,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
 	if (key == OF_KEY_RETURN && hud->getState() == "start") {
 		hud->changeState("play");
+		//balls.insert(delaySpawn());
 	}
 	else if (hud->getState() == "play") {
 		if (key == 'w') {
@@ -78,6 +83,8 @@ void ofApp::mouseExited(int x, int y){
 void ofApp::windowResized(int w, int h){
 	hud->resize();
 	p1->changeSize();
+	p2->changeSize();
+	p2->changeX();
 }
 
 //--------------------------------------------------------------

@@ -4,17 +4,24 @@
 #pragma once
 
 #include "ofMain.h"
+class Ball;
 
 class Paddle {
 public:
-	Paddle();
+	Paddle(int x);
 	void moveUp();
 	void moveDown();
 	void draw();
 	void fire();
+	void trackBall(Ball* b);
+	void changeSize();
+	void changeX();
 	int getLives();
 	int getAmmo();
-	void changeSize();
+	int getX();
+	int getY();
+	int getW();
+	int getH();
 
 private:
 	float x;
