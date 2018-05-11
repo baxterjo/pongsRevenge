@@ -2,6 +2,7 @@
 //Jordan baxter
 
 #include "Paddle.h"
+#include "Ball.h"
 
 Paddle::Paddle(int x) {
 	this->x = x;
@@ -32,8 +33,23 @@ void Paddle::fire() {
 	this->ammo -= 1;
 }
 
-void Paddle::trackBall(Ball* b) {
-
+void Paddle::trackBall(vector<Ball*> balls) {
+	Ball* closest = balls[0];
+	int chance = ofRandom(100);
+	for (int i = 0; i < balls.size(); ++i) {
+		if (balls[i]->getX() > closest->getX()) {
+			closest = balls[i];
+		}
+	}
+	if (chance > 50) {
+		if (closest->getY() < this->y + ofRandom(this->getH())) {
+			this->moveUp();
+		}
+		else {
+			this->moveDown();
+		}
+	}
+	
 }
 
 void Paddle::changeSize() {
@@ -43,6 +59,10 @@ void Paddle::changeSize() {
 
 void Paddle::changeX() {
 	this->x = ofGetWidth() - ofGetWidth() / 150 - 20;
+}
+
+void Paddle::changeLives(int n) {
+	this->lives += n;
 }
 
 int Paddle::getLives() {

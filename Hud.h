@@ -4,7 +4,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Paddle.h"
+class Paddle;
 
 class Hud {
 public:
@@ -19,6 +19,7 @@ public:
 	void drawScore();
 	void drawLives(Paddle* p);
 	void drawAmmo(Paddle* p);
+	void changeScore(int x);
 	void resize();
 
 private:

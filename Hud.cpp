@@ -83,7 +83,9 @@ void Hud::drawAmmo(Paddle* p) {
 	this->gameFont.drawString("Ammo  " + ofToString(p->getAmmo()), ofGetWidth() * .25, 10 + gameFont.stringHeight("Ammo  " + ofToString(p->getAmmo())));
 }
 
-
+void Hud::changeScore(int x) {
+	this->score += x;
+}
 
 void Hud::resize() {
 	this->titleFont.load("Act_of_Rejection.ttf", ofGetWidth() / 10, true, true);

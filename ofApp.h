@@ -1,3 +1,6 @@
+//ofApp.h
+//Jordan Baxter
+
 #pragma once
 
 #include "ofMain.h"

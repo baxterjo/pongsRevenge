@@ -1,3 +1,6 @@
+//ofApp.cpp
+//Jordan Baxter
+
 #include "ofApp.h"
 #include "Hud.h"
 #include "Ball.h"
@@ -14,7 +17,17 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	if (hud->getState() == "play") {
-
+		for (int i = 0; i < balls.size(); ++i) {
+			balls[i]->move();
+			balls[i]->hitLeftPaddle(p1);
+			balls[i]->hitRightPaddle(p2);
+			balls[i]->hitLeftGoal(p1);
+			balls[i]->hitRightGoal(hud);
+			balls[i]->hitWall();
+		}
+		if (!balls.empty()) {
+			p2->trackBall(balls);
+		}
 	}
 }
 
@@ -24,6 +37,9 @@ void ofApp::draw(){
 	if (hud->getState() == "play") {
 		p1->draw();
 		p2->draw();
+		for (int i = 0; i < balls.size(); ++i) {
+			balls[i]->draw();
+		}
 	}
 	
 }
@@ -32,7 +48,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
 	if (key == OF_KEY_RETURN && hud->getState() == "start") {
 		hud->changeState("play");
-		//balls.insert(delaySpawn());
+		balls.push_back(new Ball());
 	}
 	else if (hud->getState() == "play") {
 		if (key == 'w') {

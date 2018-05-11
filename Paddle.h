@@ -13,9 +13,10 @@ public:
 	void moveDown();
 	void draw();
 	void fire();
-	void trackBall(Ball* b);
+	void trackBall(vector<Ball*> balls);
 	void changeSize();
 	void changeX();
+	void changeLives(int n);
 	int getLives();
 	int getAmmo();
 	int getX();
