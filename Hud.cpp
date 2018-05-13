@@ -92,3 +92,7 @@ void Hud::resize() {
 	this->subtitleFont.load("Act_of_Rejection.ttf", ofGetWidth() / 30, true, true);
 	this->gameFont.load("Stay_On_The_Ground_Grunge.ttf", ofGetWidth() / 40, true, true);
 }
+
+int Hud::getScore() {
+	return this->score;
+}

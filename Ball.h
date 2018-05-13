@@ -11,14 +11,14 @@ class Ball {
 public:
 	Ball();
 	Ball(float x, float y, float r, float s, ofColor c);
-	~Ball();
 	void move();
 	void draw();
 	void hitWall();
-	void hitLeftPaddle(Paddle* p);
+	void hitLeftPaddle(Paddle* p, Hud* h);
 	void hitRightPaddle(Paddle* p);
 	void hitLeftGoal(Paddle* p);
 	void hitRightGoal(Hud* hud);
+	int random();
 	float getX();
 	float getY();
 

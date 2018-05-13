@@ -8,6 +8,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofSetFrameRate(60);
 	ofBackground(0,0,0);
 	hud = new Hud();
 	p1 = new Paddle(20);
@@ -18,15 +19,15 @@ void ofApp::setup(){
 void ofApp::update(){
 	if (hud->getState() == "play") {
 		for (int i = 0; i < balls.size(); ++i) {
-			balls[i]->move();
-			balls[i]->hitLeftPaddle(p1);
-			balls[i]->hitRightPaddle(p2);
-			balls[i]->hitLeftGoal(p1);
-			balls[i]->hitRightGoal(hud);
-			balls[i]->hitWall();
-		}
-		if (!balls.empty()) {
-			p2->trackBall(balls);
+			if (!balls.empty()) {
+				balls[i]->move();
+				balls[i]->hitLeftPaddle(p1, hud);
+				balls[i]->hitRightPaddle(p2);
+				balls[i]->hitLeftGoal(p1);
+				balls[i]->hitRightGoal(hud);
+				balls[i]->hitWall();
+				p2->trackBall(balls);
+			}
 		}
 	}
 }
@@ -51,12 +52,7 @@ void ofApp::keyPressed(int key){
 		balls.push_back(new Ball());
 	}
 	else if (hud->getState() == "play") {
-		if (key == 'w') {
-			p1->moveUp();
-		}
-		else if (key == 's') {
-			p1->moveDown();
-		}
+		
 	}
 }
 
@@ -67,7 +63,7 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+	p1->trackMouse(y);
 }
 
 //--------------------------------------------------------------
@@ -98,9 +94,9 @@ void ofApp::mouseExited(int x, int y){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 	hud->resize();
-	p1->changeSize();
-	p2->changeSize();
-	p2->changeX();
+	p1->leftResize();
+	p2->rightResize();
+	
 }
 
 //--------------------------------------------------------------

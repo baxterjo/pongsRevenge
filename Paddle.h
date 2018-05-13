@@ -14,8 +14,9 @@ public:
 	void draw();
 	void fire();
 	void trackBall(vector<Ball*> balls);
-	void changeSize();
-	void changeX();
+	void trackMouse(float y);
+	void leftResize();
+	void rightResize();
 	void changeLives(int n);
 	int getLives();
 	int getAmmo();

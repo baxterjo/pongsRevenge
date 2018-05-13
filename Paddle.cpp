@@ -9,18 +9,22 @@ Paddle::Paddle(int x) {
 	this->y = ofGetHeight() / 2;
 	this->h = ofGetHeight() / 10;
 	this->w = ofGetWidth() / 150;
-	this->s = 10;
+	this->s = ofGetHeight() * .01;
 	this->lives = 3;
 	this->ammo = 0;
 	this->color = ofColor(255, 255, 255);
 };
 
 void Paddle::moveUp(){
-	this->y -= this->s;
+	if (this->y > 0) {
+		this->y -= this->s;
+	}	
 }
 
 void Paddle::moveDown() {
-	this->y += this->s;
+	if (this->y + this->h < ofGetHeight()) {
+		this->y += this->s;
+	}
 }
 
 void Paddle::draw() {
@@ -41,23 +45,23 @@ void Paddle::trackBall(vector<Ball*> balls) {
 			closest = balls[i];
 		}
 	}
-	if (chance > 50) {
-		if (closest->getY() < this->y + ofRandom(this->getH())) {
-			this->moveUp();
-		}
-		else {
-			this->moveDown();
-		}
-	}
+	this->y = closest->getY() - this->h/2;
 	
 }
 
-void Paddle::changeSize() {
-	this->w = ofGetWidth() / 150;
-	this->h = ofGetHeight() / 15;
+void Paddle::trackMouse(float y) {
+	this->y = y - this->h/2;
 }
 
-void Paddle::changeX() {
+void Paddle::leftResize() {
+	this->w = ofGetWidth() / 150;
+	this->h = ofGetHeight() / 15;
+	this->s = ofGetHeight() * .01;
+}
+
+void Paddle::rightResize() {
+	this->w = ofGetWidth() / 150;
+	this->h = ofGetHeight() / 15;
 	this->x = ofGetWidth() - ofGetWidth() / 150 - 20;
 }
 

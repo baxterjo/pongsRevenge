@@ -21,6 +21,7 @@ public:
 	void drawAmmo(Paddle* p);
 	void changeScore(int x);
 	void resize();
+	int getScore();
 
 private:
 	string state;
