@@ -13,8 +13,7 @@ Ball::Ball() {
 	this->x = ofGetWidth() / 2;
 	this->y = ofGetHeight() / 2;
 	this->r = 5;
-	this->vx = ofGetWidth() * .005 * this->random();
-	this->vy = this->random() * ofNoise(1) * 2;
+	
 	this->color = ofColor(255, 255, 255);
 	this->t = 1;
 };
@@ -27,6 +26,10 @@ Ball::Ball(float x, float y, float r, float s, ofColor c){
 	this->vy = s;
 	this->color = c;
 };
+
+Ball::~Ball() {
+
+}
 
 
 void Ball::move() {
@@ -60,15 +63,26 @@ void Ball::hitRightPaddle(Paddle* p){
 	}
 }
 
-void Ball :: hitLeftGoal(Paddle* p) {
+void Ball :: hitLeftGoal(Paddle* p, vector<Ball*>* balls) {
 	if (this->x < (0 - this->r)) {
-		p->changeLives(-1);
-	}
+		if (balls->size() == 1) {
+			p->changeLives(-1);
+			this->x = ofGetWidth() / 2;
+			this->y = ofGetHeight() / 2;
+			this->vx = ofGetWidth() * .005 * this->random();
+			this->vy = this->random() * ofNoise(1) * 2;
+		}
+		else {
+			delete this;
+		}
+		
+	}	
 }
 
 void Ball::hitRightGoal(Hud* hud) {
 	if (this->x > (ofGetWidth() + this->r)) {
 		hud->changeScore(100);
+		delete this;
 	}
 }
 

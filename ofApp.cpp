@@ -19,15 +19,13 @@ void ofApp::setup(){
 void ofApp::update(){
 	if (hud->getState() == "play") {
 		for (int i = 0; i < balls.size(); ++i) {
-			if (!balls.empty()) {
-				balls[i]->move();
-				balls[i]->hitLeftPaddle(p1, hud);
-				balls[i]->hitRightPaddle(p2);
-				balls[i]->hitLeftGoal(p1);
-				balls[i]->hitRightGoal(hud);
-				balls[i]->hitWall();
-				p2->trackBall(balls);
-			}
+			balls[i]->move();
+			balls[i]->hitLeftPaddle(p1, hud);
+			balls[i]->hitRightPaddle(p2);
+			balls[i]->hitRightGoal(hud);
+			balls[i]->hitWall();
+			p2->trackBall(balls);
+			balls[i]->hitLeftGoal(p1, &balls);
 		}
 	}
 }
@@ -48,8 +46,8 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	if (key == OF_KEY_RETURN && hud->getState() == "start") {
-		hud->changeState("play");
 		balls.push_back(new Ball());
+		hud->changeState("play");
 	}
 	else if (hud->getState() == "play") {
 		
