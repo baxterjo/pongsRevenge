@@ -7,6 +7,7 @@
 #include "Hud.h"
 #include "Ball.h"
 #include "Paddle.h"
+#include "Bullet.h"
 
 class ofApp : public ofBaseApp{
 
@@ -16,6 +17,9 @@ class ofApp : public ofBaseApp{
 		Paddle* p1;
 		Paddle* p2;
 		vector<Ball*> balls;
+		vector<Bullet*> bullets;
+		ofFile hiScore;
+		string hiScoreString;
 
 		void setup();
 		void update();

@@ -17,8 +17,8 @@ public:
 	void hitWall();
 	void hitLeftPaddle(Paddle* p, Hud* h);
 	void hitRightPaddle(Paddle* p);
-	void hitLeftGoal(Paddle* p, vector<Ball*>* balls);
-	void hitRightGoal(Hud* hud);
+	void hitLeftGoal(Paddle* p, Hud* hud, vector<Ball*>* balls);
+	void hitRightGoal(Paddle* p, Hud* hud, vector<Ball*>* balls);
 	int random();
 	float getX();
 	float getY();

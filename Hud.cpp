@@ -3,6 +3,10 @@
 
 #include "Hud.h"
 #include "ofApp.h"
+#include "Paddle.h"
+
+
+
 
 Hud::Hud() {
 	this->state = "start";
@@ -25,18 +29,21 @@ string Hud::getState() {
 void Hud::draw(Paddle* p) {
 	ofSetColor(this->color);
 	if (this->state == "start") {
-		Hud::drawStart();
+		this->drawStart();
 
 	}
 	else if (this->state == "play") {
-		Hud::drawPlay(p);
+		this->drawPlay(p);
 	}
 	else if (this->state == "end") {
-		//Hud::drawEnd();
+		this->drawEnd();
 	}
 }
 
 void Hud::drawStart() {
+
+	string x = ofToString(this->hiScore);
+
 	ofSetColor(255);
 	this->titleFont.drawString("Pong's Revenge!", ofGetWidth() / 2 - titleFont.stringWidth("Pong's Revenge!") / 2 - 2, ofGetHeight() / 2 - titleFont.stringHeight("Pong's Revenge!") / 2);
 	this->titleFont.drawString("Pong's Revenge!", ofGetWidth() / 2 - titleFont.stringWidth("Pong's Revenge!") / 2 + 2, ofGetHeight() / 2 - titleFont.stringHeight("Pong's Revenge!") / 2);
@@ -44,6 +51,22 @@ void Hud::drawStart() {
 	this->titleFont.drawString("Pong's Revenge!", ofGetWidth() / 2 - titleFont.stringWidth("Pong's Revenge!") / 2, ofGetHeight() / 2 - titleFont.stringHeight("Pong's Revenge!") / 2 + 2);
 	ofSetColor(227, 15, 15);
 	this->titleFont.drawString("Pong's Revenge!", ofGetWidth() / 2 - titleFont.stringWidth("Pong's Revenge!") / 2, ofGetHeight() / 2 - titleFont.stringHeight("Pong's Revenge!") / 2);
+
+	ofSetColor(255);
+	this->subtitleFont.drawString("High Score:", ofGetWidth() / 2 - subtitleFont.stringWidth("High Score:") / 2 - 2, ofGetHeight() / 2 + 5);
+	this->subtitleFont.drawString("High Score:", ofGetWidth() / 2 - subtitleFont.stringWidth("High Score:") / 2 + 2, ofGetHeight() / 2 + 5);
+	this->subtitleFont.drawString("High Score:", ofGetWidth() / 2 - subtitleFont.stringWidth("High Score:") / 2, ofGetHeight() / 2 + 5);
+	this->subtitleFont.drawString("High Score:", ofGetWidth() / 2 - subtitleFont.stringWidth("High Score:") / 2, ofGetHeight() / 2 + 5);
+	ofSetColor(227, 15, 15);
+	this->subtitleFont.drawString("High Score:", ofGetWidth() / 2 - subtitleFont.stringWidth("High Score:") / 2, ofGetHeight() / 2 + 5);
+
+	ofSetColor(255);
+	this->subtitleFont.drawString(x, ofGetWidth() / 2 - subtitleFont.stringWidth(x) / 2 - 2, ofGetHeight() / 2 + 5 + subtitleFont.stringHeight(x) * 2);
+	this->subtitleFont.drawString(x, ofGetWidth() / 2 - subtitleFont.stringWidth(x) / 2 + 2, ofGetHeight() / 2 + 5 + subtitleFont.stringHeight(x) * 2);
+	this->subtitleFont.drawString(x, ofGetWidth() / 2 - subtitleFont.stringWidth(x) / 2, ofGetHeight() / 2 + 7 + subtitleFont.stringHeight(x) * 2);
+	this->subtitleFont.drawString(x, ofGetWidth() / 2 - subtitleFont.stringWidth(x) / 2, ofGetHeight() / 2 + 3 + subtitleFont.stringHeight(x) * 2);
+	ofSetColor(227, 15, 15);
+	this->subtitleFont.drawString(x, ofGetWidth() / 2 - subtitleFont.stringWidth(x) / 2, ofGetHeight() / 2 + 5+ subtitleFont.stringHeight(x) * 2);
 
 	ofSetColor(255);
 	this->subtitleFont.drawString("Press ENTER to get revenge!", ofGetWidth() / 2 - subtitleFont.stringWidth("Press enter to get revenge!") / 2 - 2, ofGetHeight() * (3 / 2) - subtitleFont.stringHeight("Press enter to get revenge!") / 2);
@@ -60,6 +83,37 @@ void Hud::drawPlay(Paddle* p) {
 	this->drawScore();
 	this->drawLives(p);
 	this->drawAmmo(p);
+}
+
+void Hud::drawEnd() {
+	ofSetColor(255);
+	this->titleFont.drawString("Game Over", ofGetWidth() / 2 - titleFont.stringWidth("Game Over") / 2 - 2, ofGetHeight() / 2 - titleFont.stringHeight("Game Over") / 2);
+	this->titleFont.drawString("Game Over", ofGetWidth() / 2 - titleFont.stringWidth("Game Over") / 2 + 2, ofGetHeight() / 2 - titleFont.stringHeight("Game Over") / 2);
+	this->titleFont.drawString("Game Over", ofGetWidth() / 2 - titleFont.stringWidth("Game Over") / 2, ofGetHeight() / 2 - titleFont.stringHeight("Game Over") / 2 - 2);
+	this->titleFont.drawString("Game Over", ofGetWidth() / 2 - titleFont.stringWidth("Game Over") / 2, ofGetHeight() / 2 - titleFont.stringHeight("Game Over") / 2 + 2);
+	ofSetColor(227, 15, 15);
+	this->titleFont.drawString("Game Over", ofGetWidth() / 2 - titleFont.stringWidth("Game Over") / 2, ofGetHeight() / 2 - titleFont.stringHeight("Game Over") / 2);
+
+	if (this->score > this->hiScore) {
+		string hs = ofToString(this->score);
+		ofSetColor(255);
+		this->subtitleFont.drawString("New High Score!", ofGetWidth() / 2 - subtitleFont.stringWidth("New High Score!") / 2 - 2, ofGetHeight() / 2 + 5);
+		this->subtitleFont.drawString("New High Score!", ofGetWidth() / 2 - subtitleFont.stringWidth("New High Score!") / 2 + 2, ofGetHeight() / 2 + 5);
+		this->subtitleFont.drawString("New High Score!", ofGetWidth() / 2 - subtitleFont.stringWidth("New High Score!") / 2, ofGetHeight() / 2 + 5);
+		this->subtitleFont.drawString("New High Score!", ofGetWidth() / 2 - subtitleFont.stringWidth("New High Score!") / 2, ofGetHeight() / 2 + 5);
+		ofSetColor(227, 15, 15);
+		this->subtitleFont.drawString("New High Score!", ofGetWidth() / 2 - subtitleFont.stringWidth("New High Score!") / 2, ofGetHeight() / 2 + 5);
+
+		ofSetColor(255);
+		this->subtitleFont.drawString(hs, ofGetWidth() / 2 - subtitleFont.stringWidth(hs) / 2 - 2, ofGetHeight() / 2 + 10 + subtitleFont.stringHeight(hs));
+		this->subtitleFont.drawString(hs, ofGetWidth() / 2 - subtitleFont.stringWidth(hs) / 2 + 2, ofGetHeight() / 2 + 10 + subtitleFont.stringHeight(hs));
+		this->subtitleFont.drawString(hs, ofGetWidth() / 2 - subtitleFont.stringWidth(hs) / 2, ofGetHeight() / 2 + 10 + subtitleFont.stringHeight(hs));
+		this->subtitleFont.drawString(hs, ofGetWidth() / 2 - subtitleFont.stringWidth(hs) / 2, ofGetHeight() / 2 + 10 + subtitleFont.stringHeight(hs));
+		ofSetColor(227, 15, 15);
+		this->subtitleFont.drawString(hs, ofGetWidth() / 2 - subtitleFont.stringWidth(hs) / 2, ofGetHeight() / 2 + 10 + subtitleFont.stringHeight(hs));
+
+
+	}
 }
 
 void Hud::drawCenterLine(int bottom) {
@@ -87,6 +141,10 @@ void Hud::changeScore(int x) {
 	this->score += x;
 }
 
+void Hud::changeHiScore(int x) {
+	this->hiScore = x;
+}
+
 void Hud::resize() {
 	this->titleFont.load("Act_of_Rejection.ttf", ofGetWidth() / 10, true, true);
 	this->subtitleFont.load("Act_of_Rejection.ttf", ofGetWidth() / 30, true, true);
@@ -95,4 +153,8 @@ void Hud::resize() {
 
 int Hud::getScore() {
 	return this->score;
+}
+
+int Hud::getHiScore() {
+	return this->hiScore;
 }

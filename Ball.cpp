@@ -13,7 +13,8 @@ Ball::Ball() {
 	this->x = ofGetWidth() / 2;
 	this->y = ofGetHeight() / 2;
 	this->r = 5;
-	
+	this->vx = ofGetWidth() * .005 * this->random();
+	this->vy = this->random() * ofNoise(1) * ofGetHeight() * .01;
 	this->color = ofColor(255, 255, 255);
 	this->t = 1;
 };
@@ -50,20 +51,24 @@ void Ball::hitWall() {
 
 void Ball::hitLeftPaddle(Paddle* p, Hud* h) {
 	if (this->x - this->r < p->getX() + p->getW() && this->y > p->getY() && this->y < p->getY() + p->getH()) {
-		this->vx =((ofGetWidth() * .01) / (1 + exp(-.5*(this->t - 1))));
-		this->t += .01;
+		this->vx =((ofGetWidth() * .01) / (1 + exp(-1*(this->t - 1))));
+		this->t += .1;
 		h->changeScore(10);
+		this->vy += ofMap(this->y, p->getY(), p->getY() + p->getH(), ofGetHeight() * -.01, ofGetHeight() * .01);
+		if (h->getScore() % 50 == 0) {
+			p->changeAmmo(1);
+		}
 	}
 }
 
 void Ball::hitRightPaddle(Paddle* p){
 	if (this->x + this->r > p->getX() && this->y > p->getY() && this->y < p->getY() + p->getH()) {
-		this->vx = -1 * ((ofGetWidth() * .010) / (1 + exp(-.5*(this->t - 1))));
-		this->t += .01;
+		this->vx = -1 * ((ofGetWidth() * .010) / (1 + exp(-1*(this->t - 1))));
+		this->t += .1;
 	}
 }
 
-void Ball :: hitLeftGoal(Paddle* p, vector<Ball*>* balls) {
+void Ball :: hitLeftGoal(Paddle* p, Hud* hud, vector<Ball*>* balls) {
 	if (this->x < (0 - this->r)) {
 		if (balls->size() == 1) {
 			p->changeLives(-1);
@@ -73,18 +78,43 @@ void Ball :: hitLeftGoal(Paddle* p, vector<Ball*>* balls) {
 			this->vy = this->random() * ofNoise(1) * 2;
 		}
 		else {
-			delete this;
+			
 		}
-		
+		if (p->getLives() == 0) {
+			hud->changeState("end");
+		}
 	}	
 }
 
-void Ball::hitRightGoal(Hud* hud) {
+void Ball::hitRightGoal(Paddle* p, Hud* hud, vector<Ball*>* balls) {
 	if (this->x > (ofGetWidth() + this->r)) {
-		hud->changeScore(100);
-		delete this;
+		if (balls->size() == 1) {
+			hud->changeScore(100);
+			this->x = ofGetWidth() / 2;
+			this->y = ofGetHeight() / 2;
+			this->vx = ofGetWidth() * .005 * this->random();
+			this->vy = this->random() * ofNoise(1) * 2;
+			if (p->getLives() == 4) {
+				balls->push_back(new Ball());
+			}
+			else {
+				p->changeLives(1);
+			}
+		} 
+		else {
+			hud->changeScore(100);
+			if (p->getLives() == 4) {
+				balls->push_back(new Ball());
+			}
+			else {
+				p->changeLives(1);
+			}
+			delete this;
+		}
+
 	}
 }
+
 
 int Ball::random() {
 	if (rand() % 2 == 1) {
